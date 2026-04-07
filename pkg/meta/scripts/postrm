@@ -1,0 +1,7 @@
+#!/bin/bash
+# Post-removal script for walkies
+# Called after files are removed.
+set -e
+
+echo "walkies removed — network will not be auto-configured on next boot."
+exit 0

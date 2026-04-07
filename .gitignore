@@ -1,0 +1,12 @@
+# Build artefacts
+build/
+
+# dimsim package artefacts — binary is populated by `make package`
+pkg/payload/sbin/walkies
+*.dpk
+
+# Editor / IDE artefacts
+.DS_Store
+*.swp
+*.swo
+*~

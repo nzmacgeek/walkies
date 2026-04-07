@@ -1,0 +1,11 @@
+# /etc/claw/services.d/walkies-monitor.yml
+# Network event monitor — subscribes to netctl multicast groups and logs events
+# "The Magic Claw rests… but watches everything." — Claw boot sequence
+name: walkies-monitor
+description: "Network event monitor — logs link, address and route changes"
+type: simple
+start_cmd: /sbin/walkies -m
+user: root
+restart: on-failure
+restart_delay: 5
+after: claw-network.target

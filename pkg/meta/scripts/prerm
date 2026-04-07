@@ -1,0 +1,11 @@
+#!/bin/bash
+# Pre-removal script for walkies
+# Called before files are removed.
+set -e
+
+# Stop the monitor daemon if claw is running.
+if command -v clawctl >/dev/null 2>&1; then
+    clawctl stop walkies-monitor 2>/dev/null || true
+fi
+
+exit 0
