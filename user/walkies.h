@@ -125,6 +125,21 @@ typedef struct {
 #define NETCTL_GROUP_ALL            7   /* All event groups */
 
 /* -------------------------------------------------------------------------
+ * Address families used in NETCTL_ATTR_ADDR_FAMILY payloads
+ * (mirrors standard AF_* values for portability with the kernel)
+ * ------------------------------------------------------------------------- */
+
+#define NETCTL_ADDR_FAMILY_INET     2   /* IPv4 — AF_INET */
+
+/* -------------------------------------------------------------------------
+ * Well-known address constants (host byte order)
+ * ------------------------------------------------------------------------- */
+
+#define LOOPBACK_ADDR_HBO   ((uint32_t)0x7F000001U)  /* 127.0.0.1 */
+#define LOOPBACK_PREFIX_LEN ((uint8_t)8)             /* /8 */
+#define DEFAULT_ROUTE_DST   ((uint32_t)0U)           /* 0.0.0.0 — default route */
+
+/* -------------------------------------------------------------------------
  * Buffer sizes
  * ------------------------------------------------------------------------- */
 

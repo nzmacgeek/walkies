@@ -417,7 +417,7 @@ static int iface_add_addr(int fd, uint32_t ifindex,
     if (msg_add_attr(&msg, NETCTL_ATTR_IFINDEX, &ifindex, sizeof(ifindex)) < 0)
         return -1;
 
-    uint16_t family = 2;  /* AF_INET */
+    uint16_t family = NETCTL_ADDR_FAMILY_INET;
     if (msg_add_attr(&msg, NETCTL_ATTR_ADDR_FAMILY, &family, sizeof(family)) < 0)
         return -1;
 
@@ -442,7 +442,7 @@ static int route_add_default(int fd, uint32_t gw_hbo, uint32_t ifindex)
     netctl_msg_t msg;
     msg_init(&msg, NETCTL_MSG_ROUTE_NEW, 0);
 
-    uint32_t dst = 0;  /* 0.0.0.0 — default route destination */
+    uint32_t dst = DEFAULT_ROUTE_DST;
     if (msg_add_attr(&msg, NETCTL_ATTR_ROUTE_DST, &dst, sizeof(dst)) < 0)
         return -1;
 
@@ -513,8 +513,7 @@ static int apply_iface(int fd, iface_config_t *cfg)
 
     /* Loopback: default to 127.0.0.1/8 when no address was specified */
     if (cfg->method == METHOD_LOOPBACK && cfg->address == 0) {
-        uint32_t lo_addr = (127U << 24) | 1U;  /* 127.0.0.1 in HBO */
-        if (iface_add_addr(fd, ifindex, lo_addr, 8) < 0) {
+        if (iface_add_addr(fd, ifindex, LOOPBACK_ADDR_HBO, LOOPBACK_PREFIX_LEN) < 0) {
             fprintf(stderr, "[walkies]   Failed to add loopback address\n");
             return -1;
         }
