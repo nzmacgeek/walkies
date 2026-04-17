@@ -18,6 +18,12 @@ service in the `claw-network.target` boot stage, and ships as a
 ## Building
 
 ```bash
+# Generate ./configure from configure.ac
+./autogen.sh
+
+# Auto-detect musl/sysroot and dimsim tool paths into config.mk
+./configure
+
 # Build both binaries for linux/i386 (default, static musl)
 make
 
@@ -29,6 +35,20 @@ make musl && make
 ```
 
 Output: `build/walkies`
+
+`./configure` looks for:
+
+- a BlueyOS image sysroot at `/opt/blueyos-sysroot`
+- a usable musl sysroot under `SYSROOT` or `/opt/blueyos-sysroot`
+- `dpkbuild` and `dimsim` in `PATH`
+
+It writes the detected values to `config.mk`, which the Makefile includes on
+subsequent builds. You can override any detected value when configuring:
+
+```bash
+MUSL_PREFIX=/path/to/musl SYSROOT=/mnt/blueyos DPKBUILD=/opt/bin/dpkbuild DIMSIM=/opt/bin/dimsim ./configure
+./configure --enable-debug
+```
 
 ## Usage
 
@@ -79,11 +99,30 @@ iface eth0 inet dhcp
 ## Packaging (dimsim)
 
 ```bash
-# Requires dpkbuild from https://github.com/nzmacgeek/dimsim
+# Requires dpkbuild and dimsim from https://github.com/nzmacgeek/dimsim
+make dpk
+
+# Compatibility alias used by biscuits-baker recipes
 make package
+
+# Build the .dpk and install it into a mounted BlueyOS rootfs
+make install SYSROOT=/mnt/blueyos
+
+# Optional helper script to stamp manifest version/arch and package
+./build-dpk.sh 0.1.0
 ```
 
-Output: `walkies-0.1.0-i386.dpk`
+Output: `build/dpk/walkies-0.1.0-i386.dpk` (also copied to repository root)
+
+`make install` uses dimsim's offline mode and runs the equivalent of:
+
+```bash
+dimsim --root /mnt/blueyos install ./build/dpk/walkies-0.1.0-i386.dpk
+```
+
+The target rootfs must already look like a BlueyOS installation, including
+`/etc/claw/` and `/bin/bash`, because dimsim validates the sysroot before it
+installs the package.
 
 The package installs:
 

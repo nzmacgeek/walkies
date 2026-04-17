@@ -2,6 +2,7 @@
 # Network configuration — applies /etc/interfaces at boot
 # "The Magic Claw reaches out… and the world answers!" — Claw boot sequence
 name: walkies
+aliases: claw-network.service
 description: "Network configuration daemon — applies /etc/interfaces via netctl"
 type: oneshot
 start_cmd: /sbin/walkies

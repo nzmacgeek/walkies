@@ -6,9 +6,10 @@
   "depends": [],
   "recommends": [],
   "conflicts": [],
-  "provides": ["network-config"],
+  "provides": ["walkies", "network-config"],
   "maintainer": "BlueyOS Maintainers <maintainers@blueyos.example>",
   "homepage": "https://github.com/nzmacgeek/walkies",
+  "core": true,
   "files": [],
   "scripts": {}
 }

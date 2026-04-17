@@ -4,6 +4,11 @@ build/
 # dimsim package artefacts — binary is populated by `make package`
 pkg/payload/sbin/walkies
 *.dpk
+config.mk
+config.log
+config.status
+configure
+autom4te.cache/
 
 # Editor / IDE artefacts
 .DS_Store
