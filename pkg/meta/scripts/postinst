@@ -1,0 +1,15 @@
+#!/bin/bash
+# Post-installation script for walkies
+# Called after files are placed.
+set -e
+
+echo "walkies installed — network configuration daemon is ready."
+echo "Claw service units are in /etc/claw/services.d/ and /etc/claw/targets.d/."
+echo ""
+echo "  walkies.service         — oneshot: applies /etc/interfaces at boot"
+echo "  walkies-monitor.service — simple daemon: monitors network events"
+echo "  claw-network.target     — reached once walkies.service completes"
+echo ""
+echo "Edit /etc/interfaces to configure your network interfaces."
+
+exit 0

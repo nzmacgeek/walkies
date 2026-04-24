@@ -1,0 +1,15 @@
+{
+  "name": "walkies",
+  "version": "0.1.0",
+  "arch": "i386",
+  "description": "Network configuration daemon for BlueyOS — configures interfaces, addresses and routes via the AF_BLUEY_NETCTL control plane",
+  "depends": [],
+  "recommends": [],
+  "conflicts": [],
+  "provides": ["walkies", "network-config"],
+  "maintainer": "BlueyOS Maintainers <maintainers@blueyos.example>",
+  "homepage": "https://github.com/nzmacgeek/walkies",
+  "core": true,
+  "files": [],
+  "scripts": {}
+}

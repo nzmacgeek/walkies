@@ -1,0 +1,7 @@
+#!/bin/bash
+# Pre-installation script for walkies
+# Called before files are placed.
+set -e
+
+# Nothing to prepare — walkies is a standalone static binary.
+exit 0

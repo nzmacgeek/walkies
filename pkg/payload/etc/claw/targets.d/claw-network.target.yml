@@ -1,0 +1,7 @@
+# /etc/claw/targets.d/claw-network.target.yml
+# Network Configuration target — reached once walkies has applied /etc/interfaces
+# "The Magic Claw reaches out… and the world answers!" — Claw boot sequence
+name: claw-network.target
+description: "Network Configuration — interfaces, addresses and routes configured"
+requires: walkies
+after: claw-basic.target

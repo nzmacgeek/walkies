@@ -1,0 +1,31 @@
+# /etc/interfaces — network interface configuration for BlueyOS walkies
+#
+# This file is read by walkies at boot to configure network interfaces
+# using the AF_BLUEY_NETCTL control plane.
+#
+# Supported methods:
+#   loopback — configure 127.0.0.1/8 on lo
+#   static   — statically assign address, netmask, and optional gateway
+#   dhcp     — bring interface UP; a separate dhcp client handles lease
+#
+# Options:
+#   address  <dotted-decimal>
+#   netmask  <dotted-decimal>
+#   gateway  <dotted-decimal>
+#   mtu      <integer>
+
+# Loopback interface
+auto lo
+iface lo inet loopback
+
+# Example static interface — uncomment and edit for your environment
+# auto eth0
+# iface eth0 inet static
+#   address 192.168.1.100
+#   netmask 255.255.255.0
+#   gateway 192.168.1.1
+#   mtu     1500
+
+# Example DHCP interface
+# auto eth0
+# iface eth0 inet dhcp
